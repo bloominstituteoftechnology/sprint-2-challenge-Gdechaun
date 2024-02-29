@@ -5,28 +5,85 @@
   <title>Web Sprint 2 Challenge</title>
   <script id="challenge">
     // 👉 CHALLENGE 1
-    function profileActivation(profile, reason) {
-
+    profile = {
+      active: true,
+      reason: 'what reason?'
     }
+    function profileActivation(profile, reason) {
+    if (profile.active){
+      if (!reason) {
+        return 'confirm status manually'
+      }
+      profile.active = false;
+      profile.reason = reason;
+    } else {
+      profile.active = true;
+      delete profile.reason;
+    }  
+    return profile;
+    }
+    let result = profileActivation(profile);
+    console.log(result); 
+    
 
     // 👉 CHALLENGE 2
-    function mineSweeper(grid, x, y) {
-
+    
+    function mineSweeper(chart, x, y) {
+      if (x < 1 || x > 3 || y < 1 || y > 3) {
+      return "invalid coordinates"
     }
+   
+    let adjustedX = x - 1;
+    let adjustedY = y - 1;
+    let cellValue = chart[adjustedY][adjustedX];
 
-    // 👉 CHALLENGE 3
+  if (cellValue === '🟥') {
+    return '🟥 💀';
+  } else if (cellValue === '🟦') {
+    return '🟦 🥳';
+  }
+}
+let chart = [["🟥", "🟦", "🟥"], ["🟦", "🟥", "🟥"], ["🟥", "🟦", "🟦"]];
+
+console.log(mineSweeper(chart, 1, 1)); 
+    
+// 👉 CHALLENGE 3
     function booleanize(obj) {
-
+      for (let properties in obj) {
+        if (properties.length > 9) {
+          return 'shorten all prop names to 9 chars or less'
+        }
+        if (obj[properties] === 0) {
+          obj[properties] = false;
+        } else if (obj[properties] === 1) {
+          obj[properties] = true;
+        } else if (obj[properties] === null) {
+          delete obj[properties]
+        }
+      }
+      return obj;
     }
 
     // 👉 CHALLENGE 4
     function scrub(text, forbidden) {
+        if ( text === '' || forbidden.length === 0) {
+          return text;
+        }
+        let char = text.split(' ');
 
-    }
+        for (let i = 0; i < char.length; i++){
+        if (forbidden.includes(char[i])) {
+
+          char[i] = 'x'.repeat(char[i].length)
+        } 
+      }
+        return char.join(' ')
+      }
+    
 
     // 👉 CHALLENGE 5 (bonus, NOT graded)
     function normalizePhoneNumber(num) {
-
+      
     }
 
     // 👉 CHALLENGE 6 (bonus, NOT graded)
